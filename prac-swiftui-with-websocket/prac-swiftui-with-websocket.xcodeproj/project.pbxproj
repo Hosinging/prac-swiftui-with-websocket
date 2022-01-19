@@ -11,6 +11,7 @@
 		E420448C279833C000485339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E420448B279833C000485339 /* ContentView.swift */; };
 		E420448E279833C200485339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E420448D279833C200485339 /* Assets.xcassets */; };
 		E4204491279833C200485339 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4204490279833C200485339 /* Preview Assets.xcassets */; };
+		E4204498279835D800485339 /* WebsocketWervice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4204497279835D800485339 /* WebsocketWervice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		E420448B279833C000485339 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E420448D279833C200485339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4204490279833C200485339 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E4204497279835D800485339 /* WebsocketWervice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsocketWervice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				E420448B279833C000485339 /* ContentView.swift */,
 				E420448D279833C200485339 /* Assets.xcassets */,
 				E420448F279833C200485339 /* Preview Content */,
+				E4204497279835D800485339 /* WebsocketWervice.swift */,
 			);
 			path = "prac-swiftui-with-websocket";
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4204498279835D800485339 /* WebsocketWervice.swift in Sources */,
 				E420448C279833C000485339 /* ContentView.swift in Sources */,
 				E420448A279833C000485339 /* prac_swiftui_with_websocketApp.swift in Sources */,
 			);
