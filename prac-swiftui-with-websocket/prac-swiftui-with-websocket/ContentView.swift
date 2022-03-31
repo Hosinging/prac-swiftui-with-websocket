@@ -10,23 +10,45 @@ import Combine
 import Foundation
 
 struct ContentView: View {
-    @ObservedObject var service = WebSocketService()
+    @ObservedObject var service = WssCoinDataService()
     
     var body: some View {
-        VStack {
-            Image(systemName: "bitcoinsign.circle.fill")
-                .font(.system(size: 150))
-                .foregroundColor(Color(red: 247 / 255, green: 142 / 255, blue: 26 / 255))
-                .padding()
+//        VStack {
+//            Image(systemName: "bitcoinsign.circle.fill")
+//                .font(.system(size: 150))
+//                .foregroundColor(Color.orange)
+//                .padding()
+//
+//            Text("USD")
+//                .font(.largeTitle)
+//                .padding()
+//
+//            Text(service.priceResult)
+//
+////            Image(systemName: "circle.fill")
+////                .font(.system(size: 150))
+////                .foregroundColor(Color.blue)
+////                .padding()
+////
+////            Text("USD")
+////                .font(.largeTitle)
+////                .padding()
+////
+////            Text(service.priceResult)
+//        }.onAppear {
+//            self.service.connect()
+//        }
+        ZStack {
+            VStack {
+                Text(service.priceResult)
+                Spacer(minLength: 0)
+            }
+            .onAppear {
+                service.connect(symbols: ["BTC_KRW"], tickTypes: ["30M"])
+            }
             
-            Text("USD")
-                .font(.largeTitle)
-                .padding()
-            
-            Text(service.priceResult)
-        }.onAppear {
-            self.service.connect()
         }
+        
     }
 }
 

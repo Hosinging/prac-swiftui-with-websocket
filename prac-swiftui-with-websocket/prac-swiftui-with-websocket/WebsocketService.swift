@@ -9,12 +9,13 @@ import Foundation
 import Combine
 
 class WebSocketService : ObservableObject {
-
     
     private let urlSession = URLSession(configuration: .default)
     private var webSocketTask: URLSessionWebSocketTask?
     
-    private let baseURL = URL(string: "wss://ws.finnhub.io?token=c7k0g3aad3i9q0uqe1g0")!
+//    private let baseURL = URL(string: "wss://ws.finnhub.io?token=c7k0g3aad3i9q0uqe1g0")!
+    //MARK: 빗썸테스트
+    private let baseURL = URL(string: "wss://pubwss.bithumb.com/pub/ws")!
     
     let didChange = PassthroughSubject<Void, Never>()
     @Published var price: String = ""
@@ -63,11 +64,25 @@ class WebSocketService : ObservableObject {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
     }
     
+    func convertJSON() -> Data? {
+        let dic = Ticker(symbols: ["BTC_KRW"], tickTypes: ["30M"])
+        guard let jsonData = try? JSONEncoder().encode(dic) else {
+            return nil
+        }
+        return jsonData
+    }
+    
     private func sendMessage()
     {
-        let string = "{\"type\":\"subscribe\",\"symbol\":\"BINANCE:BTCUSDT\"}"
+//        let string = "{\"type\":\"subscribe\",\"symbol\":\"BINANCE:BTCUSDT\"}"
+        //MARK: 빗썸용
+//        let string = "{\"type\":\"ticker\", \"symbols\": \(["BTC_KRW"]),\"tickTypes\": \(["30M"])}"
         
-        let message = URLSessionWebSocketTask.Message.string(string)
+        
+//        let message = URLSessionWebSocketTask.Message.string(string)
+        guard let jsonData = convertJSON() else { return }
+        let message = URLSessionWebSocketTask.Message.data(jsonData)
+        
         webSocketTask?.send(message) { error in
             if let error = error {
                 print("WebSocket couldn’t send message because: \(error)")
@@ -87,10 +102,10 @@ class WebSocketService : ObservableObject {
                     let decoder = JSONDecoder()
                     let result = try decoder.decode(APIResponse.self, from: Data(str.utf8))
                     DispatchQueue.main.async{
-                        self?.price = "\(result.data[0].p)"
+                        self?.price = "\(result.content?.value)"
                     }
                 } catch  {
-                    print("error is \(error.localizedDescription)")
+                    print("error is \(String(describing: error))")
                 }
                 
                 self?.receiveMessage()
